@@ -1,0 +1,18 @@
+h1{
+    color:blue;
+}
+.jumbotron{
+    background-color: blanchedalmond;
+}
+hr{
+    background-color: chartreuse;
+}
+h5 {
+    color: coral;
+}
+h5 u {
+    color:brown;
+}
+.table td, .table th{
+    vertical-align: middle;
+}
