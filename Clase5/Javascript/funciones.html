@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones en JS</title>
+</head>
+<body>
+    <script>
+        /*variables y tipos de datos */
+        /* tipos primitivos (number,boolean,String) -> copia X valor
+        /* tipos de objetos (Array,objets,function) -> copia X referencia */
+
+        console.log('\n Variables y tipos de datos')
+
+        // tipo number
+        var an = 1
+        var bn = an
+        an = 10
+        console.log(an)
+        console.log(bn)
+
+        //tipo boolean 
+        var ab = true
+        var bb = ab
+        ab = false
+        console.log(ab,typeof ab)
+        console.log(bb , typeof bb)
+
+        //tipo string 
+        var as = 'Hola'
+        var bs = ab
+        as = 'mundo'
+        console.log(as)
+        console.log(bs)
+
+
+        //caso 2
+        // tipo array
+        var aa=[1,2,3]
+        var ba=aa
+        aa[0]=11
+        console.log(aa,typeof aa,Array.isArray(aa))
+        console.log(ba, typeof ba,Array.isArray(ba))
+
+        // tipo object
+        var ao={x:1}
+        var bo=ao
+        ao.x=11
+        console.log(ao,typeof aa,Array.isArray(ao))
+        console.log(bo, typeof ba,Array.isArray(bo))
+
+        // Funciones contructores en JS
+        console.log('\n tipos de datos aplicado en funciones')
+        //1 se altera una variable f que no es la que contiene el v
+        var fecha = '2/9/2020'
+        function agregarHoraAfecha1(f){
+            f= f+' 20:24:00'
+            return f
+            
+        }
+        console.log(fecha)
+        let fechayHora = agregarHoraAfecha1(fecha)
+        console.log(fechayHora)
+        console.log(fecha)
+
+        //2 se altera el objeto fobj es una referencia a fechaobj
+        var fechaObj = {f:'2/9/2020'}
+        function agregarHoraAfecha2(fObj){
+            fObj['f']= fObj['f'] + ' 20:24:00' //notacion corchete
+            //fObj.f= fObj.f + ' 20:24:00' // notacion punto
+            return fObj
+            
+        }
+        console.log(fechaObj)
+        let fechayHoraObj = agregarHoraAfecha2(fechaObj)
+        console.log(fechaObj)
+        console.log(fechayHoraObj)
+
+
+        console.log('\n Funciones constructoras')
+
+        console.log('\n las Funciones son objetos')
+        function foo(){
+            console.log('Soy foo')
+        }
+        //ejecuto la funcion para que muestre su contenido
+        // foo es funcion y objeto
+        foo()
+        console.log(foo)
+        console.dir(foo)
+        console.dir({})
+        console.log('\n las Funciones son variadicas')
+        function suma(a=0,b=0){ //valores de parametros por default
+            return a+b
+        }
+        console.log(suma(5,5,7)) // el 7 se descarta
+        console.log(suma(5,5))
+
+        console.log('\n las variables tienen scope')
+
+        
+
+
+
+
+    </script>
+    
+</body>
+</html>

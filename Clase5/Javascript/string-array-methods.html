@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String / Array methods</title>
+    
+</head>
+<body>
+    <script>
+        /***String methods ********/
+        console.log('\nTrim')
+        let miStr = '      Hola      '
+        console.log(miStr, miStr.length)
+        let miStrSinEspacios = miStr.trim()
+        console.log(miStrSinEspacios, miStrSinEspacios.length)
+
+        /** como se normaliza un nombre en JS*/
+        console.log('\nCharat - slice')
+        let nombre='HoRacIo'
+        let nombreNormalizado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase()
+        console.log(nombreNormalizado)
+
+        console.log('\nSplit')
+        let texto = 'Hola mundo como estas?'
+        let texto2array = texto.split(' ') /*por cada palabra en el texto me genera un elemento en el array de salid */
+        console.log(texto)
+        console.log(texto2array)
+
+        //****** array methods ****///
+        console.log('\ Reverse')
+        console.log(texto2array)
+        texto2array.reverse()
+        console.log(texto2array)
+        
+        console.log('Push')
+        let miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.push(6)
+        console.log(miArray)
+ 
+        console.log('Unshift')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.unshift(6)
+        console.log(miArray)
+
+        console.log('pop')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.pop()
+        console.log(miArray)
+        miArray.pop()
+        console.log(miArray)
+
+
+        console.log('Shift')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.shift()
+        console.log(miArray)
+
+
+        console.log('Join')
+        console.log(texto2array)
+        /** no es implace por eso hay que crear una variable */
+        let array2texto = texto2array.join('--')
+        console.log(array2texto)
+
+            
+
+            
+                
+
+
+    </script>
+    
+</body>
+</html>
