@@ -19,11 +19,16 @@ new Vue({
             this.hayUnaPartidaEnJuego= true
             this.saludJugador=100
             this.saludMonstruo=100
+            this.turnos= [];
         },
         atacar: function () {
             var danio= this.calcularHeridas(3, 10)
             this.saludMonstruo -= danio
-            
+            let evento = {
+                esJugador:true,
+                text:`EL JUGADOR GOLPEA AL MONSTRUO POR ${danio}`
+            }
+            this.registrarEvento(evento);
             if (this.verificarGanador()){
                 return;
             }
@@ -34,7 +39,11 @@ new Vue({
         ataqueEspecial: function () {
             var danioEspecial = this.calcularHeridas(10, 20);
             this.saludMonstruo -= danioEspecial
-            
+            let evento = {
+                esJugador:true,
+                text:`EL JUGADOR GOLPEA AL MONSTRUO POR ${danioEspecial}`
+            }
+            this.registrarEvento(evento);
             if (this.verificarGanador()){
                 return;
             }
@@ -45,6 +54,10 @@ new Vue({
         curar: function () {
             if(this.saludJugador <= 90){
                 this.saludJugador += 10
+                this.turnos.unshift({
+                    esJugador:true,
+                    text:'EL JUGADOR SE CURA UN 10%'
+                });
             }else {
                 this.saludJugador =100
             }
@@ -53,18 +66,23 @@ new Vue({
         },
 
         registrarEvento(evento) {
-        
-        
+            // cada vez que hace algo es un evento! aca hay que hacer el agregar al array
+            this.turnos.unshift(evento);
         },
         terminarPartida: function () {
             this.hayUnaPartidaEnJuego=false;
             this.saludJugador=100;
             this.saludMonstruo=100;
+            this.turnos= [];
         },
 
         ataqueDelMonstruo: function () {
             var danioMostruo = this.calcularHeridas(5, 12)
             this.saludJugador -= danioMostruo
+            let evento = {
+                esJugador:false,
+                text:`EL MONSTRUO GOLPEA AL JUGADOR POR ${ataqueAJugador}`
+            };
             this.verificarGanador();
         },
 
@@ -76,25 +94,27 @@ new Vue({
         },
         verificarGanador: function () {
             if (this.saludMonstruo<=0){
-                if(confirm('Ganaste!!!! Jugamos de nuevo??')){
+                    if(confirm('Ganaste!!!! Jugamos de nuevo??')){
                     this.empezarPartida();
-                
-            }else {
+                    }else {
                 this.hayUnaPartidaEnJuego=false;
-            }
-            return true;
+                    }
+                return true;
             } else if (this.saludJugador<=0){
-            if(confirm('Perdiste!!:( Jugamos de nuevo??')){
+                if(confirm('Perdiste!!:( Jugamos de nuevo??')){
                 this.empezarPartida();
-            }else{
+                }else{
                 this.hayUnaPartidaEnJuego=false;
-            }
-            return true
+                }
+                return true
             }
             return false;
         },
         cssEvento(turno) {
             //Este return de un objeto es prque vue asi lo requiere, pero ponerlo acá queda mucho mas entendible en el codigo HTML.
+         
+
+            
             return {
                 'player-turno': turno.esJugador,
                 'monster-turno': !turno.esJugador
