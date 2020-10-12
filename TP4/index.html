@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP 4</title>
+    
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div id="app" class="container-fluid mt-3">
+        
+        <headerjuego v-bind:color-jugar='colorJugar'></headerjuego>
+        
+        <botones v-bind:color-jugar='colorJugar' v-bind:colors='colors' v-bind:mensajejuego='mensajejuego'></botones>
+
+        <cuadradoColor v-for="(color, index) in colors"
+            v-bind:color="color"
+            v-bind:index="index"
+            v-bind:key="myKey(color)"
+            v-bind:colors='colors'
+            v-bind:conocer-ganador="conocerGanador">
+        </cuadradoColor>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
