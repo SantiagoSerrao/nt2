@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto con vue CDN</title>
+    <!--PARA HACER COMENTARIOS-->
+    <!-- -->
+    <!--Agrego bootstrap-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    
+
+    <div id="app" class="container-fluid mt-3">
+            <div class="jumbotron">
+                <h1>Comunicacion entre componentes</h1>
+                <hr>
+               
+                 <!--Componentes -->
+                 <h2>Contadores</h2>
+                 <br>
+
+                 <p><b>{{contadores}}</b></p>
+
+                <button class="btn btn-danger" @click="contadores['cont0']++">Contador0 {{contadores['cont0']}}</button>
+                <button class="btn btn-warning" @click="contadores['cont1']++">Contador1 {{contadores['cont1']}}</button>
+                <button class="btn btn-success" @click="contadores['cont2']++">Contador2 {{contadores['cont2']}}</button>
+                 
+                 <!--El dos puntos hace el binding -->
+                 <Contador id="cont0" color="danger" :contadores="contadores"></Contador>
+                 <Contador id="cont1" color="warning" :contadores="contadores"></Contador>
+                 <Contador id="cont2" color="success" :contadores="contadores"></Contador>
+
+                <p><b>{{contadores.cont0}}</b></p>
+
+
+        </div>  
+    </div>      
+    
+
+
+
+     <!--agrego vue cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+
+
+</body>
+</html>

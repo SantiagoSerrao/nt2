@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 6 continua con el codigo de la clase 5</title>
+</head>
+<body>
+    <script>
+        console.log('Las funciones en JS tienen Clousure')
+        // las funciones cuando terminan de ejecutarse limpian los estados internos
+        function externa(x){
+            //console.log(x)
+            return function interna(y){
+                console.log(y+x)
+            }
+        }
+        // resultado en este caso es una funcion
+        let resultado= externa(50)
+        console.log(resultado)
+        //console.log(x)
+        //console.log(y)
+        resultado(10)
+
+        //dir es un inspect de objetos
+        console.dir(resultado)
+
+
+        console.log('Las funciones en JS tienen Contexto (this')
+        function foo4(){
+            console.log(this)
+        }
+        foo4()
+
+        var nombre = 'Santiago'
+        var apellido = 'Gomez'
+
+        var persona = {
+            nombre:'Juan',
+            apellido: 'Perez',
+            saludo : function(){
+                console.log(this)
+                console.log(this.nombre,this.apellido)
+                
+            }
+        }
+        // saludo ejecutado en el contexto de persona
+        persona.saludo()
+        
+        const saludoExt = persona.saludo
+        // saludo ejecutado en el contexto global
+        // this es cambiante , no es fijo
+        saludoExt()
+
+        console.log('Funciones : formas de ejecucion')
+
+        function ctx(){
+            console.log(this)
+        }
+
+        ctx()         //forma normal de ejecucion
+        ctx.apply()   //forma con apply
+        ctx.call()    // forma con call 
+        let ctxBind = ctx.bind()
+        ctxBind()
+
+
+        console.log('Uso de una funcion constructora de objetos')
+
+        console.log('creando un objeto literal')
+        var persona1 = {
+            nombre: 'Pedro',
+            edad: 29
+        }
+        console.log(persona1)
+        console.log(persona1.hasOwnProperty('nombre'))
+        console.log(persona1.hasOwnProperty('edad'))
+
+
+        console.log('Creando un objeto con el metodo create object')
+        let prototipo1 = {
+            saludar : function(){
+                console.log('Hola!!!!')
+            }
+        }
+        
+        let prototipo2 = Object.create(null,{
+            // aca trabajar esta protegida
+            trabajar : {
+                value : function() {
+                    console.log('Trabajando ......')
+                }
+            }
+        })
+        
+        var persona2 = Object.create(Object.__proto__.__proto__,{
+            nombre : {
+                value : 'Juan',
+                // proteger los campos contra escritura no deseada               
+                writable : false, // no se puede escribir
+                configurable:false, // no se puede borrar
+                enumerable:false   // no se puede recorrer
+
+            },
+            edad : {
+                value : 23
+            }
+        })
+        console.log(persona2)
+        console.log(prototipo1.isPrototypeOf(persona2))
+        console.log(persona2.hasOwnProperty('nombre'))
+        console.log(persona2.hasOwnProperty('edad'))
+
+        let e = Object.create(Object.__proto__.__proto__,{
+            x: {
+                value: 1,
+                writable: false, // esta en false para no poder cambiar valor de x
+                enumerable : true
+            },
+            y: {
+                value:2
+            }
+        })
+
+        for (let key in e){
+            console.log(key)
+        }
+
+        console.log(e)
+
+        console.log('Creando un objeto utilizando usando las funciones contructoras con new')
+
+        // usando el NEW
+        function Persona (nombre,apellido){
+            this.nombre=nombre,
+            this.apellido=apellido
+        }
+
+        var persona3= new Persona('pepe','argento')
+        
+        Persona.prototype.caminar = function() {
+            console.log('caminando..')
+        }
+        Persona.prototype.saludar = function() {
+            console.log('saludando..')
+        }
+       
+        console.log(persona3)
+        console.log(persona3.hasOwnProperty('nombre'))
+        console.log(persona3.hasOwnProperty('apellido'))
+
+
+        console.log('Creando un objeto utilizando usando funciones constructoras')
+
+        //var alumno = {
+          //  nombre:null,
+            //edad: null
+        //}
+        // estas asignaciones no crean objetos nuevos sino referencias a alumno. ana y juan son lo mismo
+        // esto no funciona! No son objetos independientes
+        
+
+        // solucion crear una fabrica de objetitos --> usar una funcion
+        // aca se retorna un objeto , no es lo mismo que con new
+        function alumno(){
+            var a = {
+                nombre: null, 
+                edad: null 
+            }
+            return a
+        }
+
+        var juan = alumno()
+        var ana = alumno()
+
+        console.log('funcionaes contructoras en ES6')
+        class Empleado {
+            constructor (nombre, edad){
+                this.nombre=nombre,
+                this.edad=edad
+            }
+            trabajar(){
+                console.log('trabajando.....')
+            }
+        }
+
+        var jose = new Empleado ('Jose',26)
+
+        
+
+    </script>
+    
+</body>
+</html>
