@@ -17,12 +17,10 @@
                         </tr>
                     </table>
                 </div>
-               </div>
-
-        
-
+              </div>
+            <h2 v-else class="alert alert-warning" >no hay usuarios</h2>
        
-        </div> 
+       </div> 
         
 
 </template>
