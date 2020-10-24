@@ -13,7 +13,6 @@
           id="desc" 
           class="form-control"
           v-model="$v.f.desc.$model"
-          
           >
           <div v-if="$v.f.desc.$error && $v.f.desc.$dirty" class="alert alert-danger mt-1">
             <div v-if="$v.f.desc.required.$invalid">Campo requerido</div>
@@ -29,7 +28,6 @@
           id="nombre" 
           class="form-control"
           v-model="$v.f.nombre.$model"
-          
           >
           <div v-if="$v.f.nombre.$error && $v.f.nombre.$dirty" class="alert alert-danger mt-1">
             <div v-if="$v.f.nombre.required.$invalid">Nombre no valido</div>
@@ -47,7 +45,6 @@
           id="email" 
           class="form-control"
           v-model="$v.f.email.$model"
-          
           >
           <div v-if="$v.f.email.$error && $v.f.email.$dirty" class="alert alert-danger mt-1">
             Este mail no es valido
@@ -60,7 +57,7 @@
         <input 
           type="submit"
           :disabled="false"
-          class="btn btn-black mt-4"
+          class="btn btn-danger mt-4"
           value="Enviar"
         >
         
@@ -117,8 +114,8 @@
      
       enviar(){
         let form = {
-          nombre: this.$v.f.desc.$model,
-          edad: this.$v.f.nombre.$model,
+          desc: this.$v.f.desc.$model,
+          nombre: this.$v.f.nombre.$model,
           email:this.$v.f.email.$model
         }
         console.log(form)
@@ -155,5 +152,8 @@
   }
   pre {
     color:white
+  }
+  btn {
+    background-color: black;
   }
 </style>
