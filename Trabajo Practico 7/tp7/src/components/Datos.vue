@@ -2,7 +2,7 @@
         <div>
           
                 
-            <div v-if="datos.length">    
+            <div >    
                 <div class="table-responsive">
                     <table class="table">
                         <tr class="bg-success text-white">
@@ -20,7 +20,7 @@
                     </table>
                 </div>
               </div>
-            <h2 v-else class="alert alert-warning" >No hay tareas en la lista</h2>
+            
        
        </div>
 

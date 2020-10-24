@@ -17,6 +17,7 @@
           <div v-if="$v.f.desc.$error && $v.f.desc.$dirty" class="alert alert-danger mt-1">
             <div v-if="$v.f.desc.required.$invalid">Campo requerido</div>
             <div v-else-if="$v.f.desc.minLength.$invalid">La descripcion tiene que ser de mas de 10 caracteres</div>
+            <div v-else-if="$v.f.desc.maxLength.$invalid">La descripcion tiene que ser maximo de 50 caracteres</div>
           </div>
       </div>
 
@@ -75,7 +76,7 @@
 </template>
 
 <script>
-  import {email,required ,minLength} from '@vuelidate/validators'
+  import {email,required ,minLength,maxLength} from '@vuelidate/validators'
   export default  {
     name: 'src-components-formulario',
     props: [],
@@ -92,7 +93,8 @@
       f: {
         desc:{
           required,
-          minLength: minLength(10)
+          minLength: minLength(10),
+          maxLength: maxLength(50)
         },
         nombre:{
           required,
