@@ -80,7 +80,7 @@
     name: 'src-components-formulario',
     props: [],
     mounted () {
-      this.getDatosFormAxios()
+      
     },
     data () {
       return {
@@ -111,12 +111,7 @@
         .then(resp => console.log(resp.data))
         .catch(error => console.log('HTTP POST ERROR' , error))
       },
-      /*Pedido de datos al backend */
-      getDatosFormAxios(){
-        this.axios(this.url)
-          .then(resp => console.log(resp.data))
-          .catch(error => console.log('HTTP GET ERROR',error))
-      },
+     
       enviar(){
         let form = {
           nombre: this.$v.f.nombre.$model,
