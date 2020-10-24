@@ -62,7 +62,7 @@
     name: 'src-components-formulario',
     props: [],
     mounted () {
-      this.getDatosForm()
+      
     },
     data () {
       return {
@@ -81,12 +81,7 @@
         .then(response => response.json())
         .then(json => console.log(json))
       },
-      /*Pedido de datos al backend */
-      getDatosForm(){
-        fetch(this.url)
-          .then(response => response.json())
-          .then(json => console.log(json))
-      },
+      
       enviar(){
         
         console.log(this.f),
