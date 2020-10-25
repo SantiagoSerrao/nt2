@@ -2,7 +2,7 @@
 
   <section class="src-components-formulario">
     <div class="jumbotron">
-    <h2>Formulario</h2>
+    <h2>Lista de tareas a realizar</h2>
     
     <form novalidate autocomplete="off" @submit.prevent="enviar()">
       
