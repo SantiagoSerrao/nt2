@@ -48,7 +48,8 @@
           v-model="$v.f.email.$model"
           >
           <div v-if="$v.f.email.$error && $v.f.email.$dirty" class="alert alert-danger mt-1">
-            Este mail no es valido
+            <div v-if="$v.f.email.required.$invalid">Este campo es requerido</div>
+            <div v-else-if="$v.f.email.email.$invalid">Este mail no es valido</div>
           </div>
       </div>
 
@@ -57,7 +58,7 @@
       <div class="form-group">
         <input 
           type="submit"
-          :disabled="false"
+          :disabled="$v.$invalid"
           class="btn btn-danger mt-4"
           value="Enviar"
         >
@@ -115,15 +116,15 @@
       },
      
       enviar(){
-        let form = {
-          desc: this.$v.f.desc.$model,
-          nombre: this.$v.f.nombre.$model,
-          email:this.$v.f.email.$model
+        this.$v.$touch()
+        if(!this.$v.$invalid){
+            let form = this.f
+          console.log(form)
+          this.sendDatosFormAxios(form)
+          this.f=this.resetForm()
+          this.$v.$reset()  
         }
-        console.log(form)
-        this.sendDatosFormAxios(form)
-        this.f=this.resetForm()
-        this.$v.$reset()
+        
       },
       resetForm(){
         return{
