@@ -47,7 +47,9 @@
           
           >
           <div v-if="$v.f.email.$error && $v.f.email.$dirty" class="alert alert-danger mt-1">
-            Este mail no es valido
+            <div v-if="$v.f.email.required.$invalid">Este campo es requerido</div>
+            <div v-else-if="$v.f.email.email.$invalid">Este mail no es valido</div>
+            
           </div>
       </div>
 
