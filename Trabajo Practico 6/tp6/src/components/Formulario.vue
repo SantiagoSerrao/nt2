@@ -29,7 +29,7 @@
           type="number" 
           id="edad" 
           class="form-control"
-          v-model="$v.f.edad.$model"
+          v-model.number="$v.f.edad.$model"
           
           >
           <div v-if="$v.f.edad.$error && $v.f.edad.$dirty" class="alert alert-danger mt-1">
@@ -56,7 +56,7 @@
       <div class="form-group">
         <input 
           type="submit"
-          :disabled="false"
+          :disabled="$v.$invalid"
           class="btn btn-danger mt-4"
           value="Enviar"
         >
@@ -106,22 +106,27 @@
     },
     methods: {
       /*Envio de datos al backend*/
-      sendDatosFormAxios(datos){
-        this.axios.post(this.url,datos,{'content-type':'application/json'})
-        .then(resp => console.log(resp.data))
-        .catch(error => console.log('HTTP POST ERROR' , error))
+      async sendDatosFormAxios(datos){
+        try{
+          let resp= await this.axios.post(this.url,datos,{'content-type':'application/json'})
+          console.log(resp.data)
+        }
+        catch(error){
+          console.log('HTTP POST ERROR' , error)
+        }
       },
      
       enviar(){
-        let form = {
-          nombre: this.$v.f.nombre.$model,
-          edad: this.$v.f.edad.$model,
-          email:this.$v.f.email.$model
+        // el touch activa las validaciones entonces no envio en blanco
+        this.$v.$touch()
+        if(!this.$v.$invalid){
+            let form = this.f
+          console.log(form)
+          this.sendDatosFormAxios(form)
+          this.f=this.resetForm()
+          this.$v.$reset()  
         }
-        console.log(form)
-        this.sendDatosFormAxios(form)
-        this.f=this.resetForm()
-        this.$v.$reset()
+        
       },
       resetForm(){
         return{
