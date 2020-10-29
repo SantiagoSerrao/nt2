@@ -4,7 +4,7 @@ export default {
          return new Date(fyh).toLocaleString()
         },
         agregarSigno : function (monto){
-            return "$ " + monto
+            return "$ " + monto 
         }
     }
 }

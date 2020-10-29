@@ -11,12 +11,15 @@
                             <th>Descripcion</th>
                             <th>Gasto</th>
                             <th>Fecha de creacion</th>
+                           
                         </tr>
+                        
                         <tr class="bg-info text-white" v-for="(dato,index) in datos" :key="index">
                             <td>{{dato.nombre}}</td>
                             <td>{{dato.desc}}</td>
                             <td>{{agregarSigno(dato.gasto)}}</td>
                             <td>{{formatearFecha(dato.createdAt)}}</td>
+                            
                         </tr>
                     </table>
                 </div>
@@ -54,10 +57,12 @@ import filters from '../filters.js'
             this.datos = resp.data
             })
           .catch(error => console.log('HTTP GET ERROR',error))
-      }
+      },
+     
+      
     },
     computed: {
-
+     
     }
 }
 

@@ -16,8 +16,8 @@
           >
           <div v-if="$v.f.nombre.$error && $v.f.nombre.$dirty" class="alert alert-danger mt-1">
             <div v-if="$v.f.nombre.required.$invalid">Nombre no valido</div>
-            <div v-else-if="$v.f.nombre.minLength.$invalid">El nombre debe tener al menos 5 caracteres</div>
-            <div v-else-if="$v.f.nombre.maxLength.$invalid">La descripcion tiene que ser maximo de 15 caracteres</div> 
+            <div v-if="$v.f.nombre.minLength.$invalid">El nombre debe tener al menos 5 caracteres</div>
+            <div v-if="$v.f.nombre.maxLength.$invalid">El nombre tiene que ser maximo de 15 caracteres</div> 
               
           </div>
       </div>
@@ -33,6 +33,7 @@
           >
           <div v-if="$v.f.gasto.$error && $v.f.gasto.$dirty" class="alert alert-danger mt-1">
             <div v-if="$v.f.gasto.required.$invalid">Este campo es requerido</div>
+            <div v-if="$v.f.gasto.numeric.$invalid">Este campo es requerido</div>
           </div>
       </div>
 
@@ -128,9 +129,9 @@
       },
       resetForm(){
         return{
-          desc:'',
           nombre:'',
-          gasto:''
+          gasto:'',
+          desc:''
         }
       }
     },
