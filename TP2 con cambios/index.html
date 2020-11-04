@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ejemplo 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+
+<!--en este agregue la busqueda de mail , dni y nombre apellido -->
+<div class="container-fluid mt-3" id="app">
+    <input type="text" class="form-control" v-model="busquedaPersona" placeholder="Ingresar un Nombre">
+    <br>
+    <input type="text" class="form-control" v-model="busquedaDni" placeholder="Ingresar DNI">
+    <br>
+    <input type="text" class="form-control" v-model="busquedaMail" placeholder="Ingresar Mail">
+    <br>
+        <div class="card-deck m-0" >
+            <div class="row">
+                <div class="col" v-for="persona in personasFiltradas">
+                    <div class="col" v-if="dniFiltrados.includes(persona)" >
+                        <div class="col" v-if="mailBuscado.includes(persona)" >   
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{getNombreCompleto(persona)}}</h5>
+                                    <p class="card-text">dni {{persona.dni}}</p>
+                                    <a href="#" class="card-link">{{persona.correo}}</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+</div>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            busquedaDni : '',
+            busquedaPersona: '',
+            busquedaMail:'',
+            //Aquí, en este array es donde tienen que agregar su información
+            personas:
+                [
+                    { nombre: 'Daniel', apellido: 'Sánchez', dni: 20442873, correo: 'danielsanchez68@hotmail.com' },
+                    //Agregar aquí nombre, apellido, dni y correo
+                    { nombre: 'Alan',apellido:'Faerverguer',dni:40829735,correo:'faeralan@gmail.com' },
+                    { nombre: 'Julián', apellido: 'Brea', dni: 40937404, correo: 'julian.brea@hotmail.com' },
+                    { nombre: 'Mauro', apellido: 'Abraham', dni: 37143235, correo: 'maauro.db@gmail.com' },
+                    { nombre: 'Pablo Hernan', apellido: 'Aquino', dni: 32123456, correo: 'pablohaquino@gmail.com' },
+                    { nombre: 'Marcelo', apellido: 'Rocchi', dni: 32677125, correo: 'marcelorocchi@hotmail.com' },
+                    { nombre: 'Florencia', apellido: 'Garduño', dni: 35805837, correo: 'garduno.florencia@gmail.com' }
+                ]
+        },
+        computed: {
+            personasFiltradas() {
+                return this.personas.filter((persona) => {
+                    let registroCompleto = `${persona.nombre}${persona.apellido}`
+                    return registroCompleto.toLowerCase().includes(this.busquedaPersona.toLowerCase())
+                });
+            },
+            dniFiltrados(){
+                return this.personasFiltradas.filter((persona) =>{
+                    let dniBuscado = `${persona.dni}`
+                    return dniBuscado.includes(this.busquedaDni)
+                } )
+            },
+            mailBuscado(){
+                return this.personasFiltradas.filter((persona) =>{
+                    let mail= `${persona.correo}`
+                    return mail.includes(this.busquedaMail)
+                })
+            },
+        },
+        methods: {
+            getNombreCompleto(persona) {
+                return `${persona.nombre} ${persona.apellido}`
+            },
+            validarCaracter(){
+                const cantCaract = 3
+                let alerta = false
+                if (this.criterioDeBusquedaNombre.length>0 && this.criterioDeBusquedaNombre.length<cantCaract) alerta = true
+                if (this.criterioDeBusquedaDNI.length>0 && this.criterioDeBusquedaDNI.length<cantCaract) alerta = true
+                return alerta
+            }
+        }
+    });
+</script>
