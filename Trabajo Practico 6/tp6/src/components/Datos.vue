@@ -50,6 +50,7 @@
             this.datos = resp.data
             })
           .catch(error => console.log('HTTP GET ERROR',error))
+          
       }
 
     },
